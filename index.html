@@ -45,6 +45,47 @@
   </div>
 
   <script>
+const stickyNav = document.querySelector('.sticky-nav');
+let isTicking = false;
+let userManuallyExpanded = false;
+let expandScrollY = 0; // Tracks scroll offset when manually tapped
+
+window.addEventListener('scroll', () => {
+  if (!isTicking) {
+    window.requestAnimationFrame(() => {
+      const scrollY = window.scrollY;
+
+      // Always reset and show fully near the very top
+      if (scrollY < 80) {
+        stickyNav.classList.remove('collapsed');
+        userManuallyExpanded = false;
+      } 
+      // If user manually tapped expand, allow them to view controls until they scroll 80px away
+      else if (userManuallyExpanded) {
+        if (Math.abs(scrollY - expandScrollY) > 80) {
+          userManuallyExpanded = false;
+          stickyNav.classList.add('collapsed');
+        }
+      } 
+      // Normal auto-collapse when scrolling down past the header
+      else if (scrollY > 220) {
+        stickyNav.classList.add('collapsed');
+      }
+
+      isTicking = false;
+    });
+    isTicking = true;
+  }
+}, { passive: true });
+
+// Tap pill to expand
+stickyNav.addEventListener('click', () => {
+  if (stickyNav.classList.contains('collapsed')) {
+    stickyNav.classList.remove('collapsed');
+    userManuallyExpanded = true;
+    expandScrollY = window.scrollY; // Store the exact position of the tap
+  }
+});
 
     const THEME_KEY = 'app_theme';
 

@@ -69,19 +69,78 @@ h1 {
   font-size: 0.95rem;
   overflow-wrap: break-word;
 }
-
+/* --- Sticky Navigation Base --- */
 .sticky-nav {
   position: sticky;
   top: 12px;
-  background: var(--bg-nav);
+  background-color: var(--bg-nav, #ffffff) !important;
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 12px 18px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  z-index: 100;
-  margin-bottom: 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+  margin: 0 auto 20px auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  cursor: default;
+  isolation: isolate;
+  overflow: hidden; /* Stops any child elements from spilling out */
+  transition: max-width 0.25s ease, padding 0.25s ease, border-radius 0.25s ease, box-shadow 0.2s ease;
+}
+
+body.dark-mode .sticky-nav {
+  background-color: #1e293b !important;
+  border-color: #334155;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.nav-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  transition: opacity 0.15s ease;
+}
+
+/* --- Collapsed State --- */
+.sticky-nav.collapsed {
+  cursor: pointer;
+  padding: 8px 18px;
+  border-radius: 999px;
+  max-width: 340px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  gap: 0;
+}
+
+/* Completely remove top row from document flow when collapsed */
+.sticky-nav.collapsed .nav-top-row {
+  display: none !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sticky-nav.collapsed .stats-row {
+  border-top: none;
+  padding-top: 0;
+  justify-content: space-between;
+  font-size: 0.84rem;
+  color: var(--text-main);
+  user-select: none;
+  width: 100%;
+}
+
+.sticky-nav.collapsed::after {
+  content: "▾ tap to expand";
+  display: block;
+  text-align: center;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  line-height: 1;
+  margin-top: 2px;
 }
 
 .nav-top-row {
