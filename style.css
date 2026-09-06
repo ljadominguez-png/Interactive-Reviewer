@@ -182,32 +182,42 @@ select.subject-select {
 select.subject-select:focus {
   border-color: #2563eb;
 }
-
 .toggle-group {
-  display: inline-flex;
+  display: flex;
   background: var(--btn-toggle-bg);
   border-radius: 8px;
   padding: 3px;
-  flex-shrink: 0;
+  width: 100%;       
+  min-width: 0;      
+  box-sizing: border-box;
 }
 
 .toggle-btn {
+  flex: 1 1 0;       
+  min-width: 0;      
   border: none;
   background: transparent;
-  padding: 8px 16px;
+  padding: 8px 6px;  
   border-radius: 6px;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--text-muted);
   cursor: pointer;
   transition: all 0.2s ease;
+  text-align: center;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
 }
 
 .toggle-btn.active {
   background: var(--bg-card);
   color: #2563eb;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .toggle-btn.active {
+  color: #60a5fa;
 }
 
 .stats-row {
