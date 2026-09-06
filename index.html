@@ -87,13 +87,14 @@
     .btn-reset {
       background: none;
       border: 1px solid #d1d5db;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 6px;
-      font-size: 0.8rem;
-      color: #6b7280;
+      font-size: 0.82rem;
+      color: #dc2626;
+      font-weight: 500;
       cursor: pointer;
     }
-    .btn-reset:hover { background: #f3f4f6; color: #111827; }
+    .btn-reset:hover { background: #fef2f2; border-color: #f87171; }
 
     .section-title {
       font-size: 1.15rem;
@@ -123,7 +124,7 @@
       font-size: 0.95rem;
     }
 
-    /* Identification Styles */
+    /* Identification */
     .input-row {
       display: flex;
       gap: 8px;
@@ -172,7 +173,7 @@
     }
     button.btn-reveal:hover:not(:disabled) { background: #e5e7eb; }
 
-    /* Multiple Choice Styles */
+    /* Multiple Choice */
     .options-grid {
       display: grid;
       grid-gap: 8px;
@@ -207,7 +208,7 @@
 
     button:disabled, input:disabled {
       cursor: not-allowed;
-      opacity: 0.75;
+      opacity: 0.8;
     }
 
     .feedback {
@@ -240,7 +241,7 @@
         <button class="toggle-btn active" id="btn-mode-ident" onclick="switchMode('identification')">Identification (Fill-in)</button>
         <button class="toggle-btn" id="btn-mode-mcq" onclick="switchMode('mcq')">Multiple Choice</button>
       </div>
-      <button class="btn-reset" onclick="resetQuiz()">Reset Current Quiz</button>
+      <button class="btn-reset" onclick="confirmReset()">Clear & Reset Quiz</button>
     </div>
     <div class="stats-row">
       <span id="score">Score: 0 / 110</span>
@@ -371,9 +372,26 @@ const quizData = [
 ];
 
 const allAnswers = [...new Set(quizData.map(d => d.ans))];
-let currentMode = 'identification';
-let score = 0;
-let completedCount = 0;
+const STORAGE_KEY = 'os_reviewer_progress_v1';
+const MODE_KEY = 'os_reviewer_mode';
+
+let currentMode = localStorage.getItem(MODE_KEY) || 'identification';
+let userProgress = loadProgress();
+
+function loadProgress() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : {};
+  } catch(e) {
+    return {};
+  }
+}
+
+function saveProgress() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(userProgress));
+  } catch(e) {}
+}
 
 function cleanString(str) {
   return str.toLowerCase()
@@ -381,23 +399,42 @@ function cleanString(str) {
             .replace(/[^a-z0-9]/g, '');
 }
 
-function shuffle(arr) {
+function seededShuffle(arr, seed) {
   const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+  let m = a.length, t, i;
+  let s = seed;
+  while (m) {
+    s = (s * 9301 + 49297) % 233280;
+    i = Math.floor((s / 233280) * m--);
+    t = a[m];
+    a[m] = a[i];
+    a[i] = t;
   }
   return a;
 }
 
 function updateBanner() {
+  let score = 0;
+  let completed = 0;
+
+  for (let i = 0; i < quizData.length; i++) {
+    const state = userProgress[i];
+    if (state && state.completed) {
+      completed++;
+      if (state.status === 'correct') {
+        score++;
+      }
+    }
+  }
+
   document.getElementById('score').innerText = `Score: ${score} / ${quizData.length}`;
-  document.getElementById('progress').innerText = `Progress: ${completedCount} / ${quizData.length} completed`;
+  document.getElementById('progress').innerText = `Progress: ${completed} / ${quizData.length} completed`;
 }
 
 function switchMode(mode) {
   if (currentMode === mode) return;
   currentMode = mode;
+  localStorage.setItem(MODE_KEY, mode);
 
   document.getElementById('btn-mode-ident').classList.toggle('active', mode === 'identification');
   document.getElementById('btn-mode-mcq').classList.toggle('active', mode === 'mcq');
@@ -409,14 +446,16 @@ function switchMode(mode) {
     hint.innerText = "Select an option for instant feedback.";
   }
 
-  resetQuiz();
+  renderQuiz();
 }
 
-function resetQuiz() {
-  score = 0;
-  completedCount = 0;
-  updateBanner();
-  renderQuiz();
+function confirmReset() {
+  if (confirm("Are you sure you want to clear all your saved answers and start fresh?")) {
+    userProgress = {};
+    saveProgress();
+    updateBanner();
+    renderQuiz();
+  }
 }
 
 function renderQuiz() {
@@ -444,7 +483,7 @@ function renderQuiz() {
     const feedback = document.createElement('div');
     feedback.className = 'feedback';
 
-    let isCompleted = false;
+    const state = userProgress[index] || { completed: false, status: null, chosen: null };
 
     if (currentMode === 'identification') {
       const row = document.createElement('div');
@@ -462,8 +501,26 @@ function renderQuiz() {
       revealBtn.className = 'btn-reveal';
       revealBtn.innerText = 'Reveal';
 
+      // Restore past state
+      if (state.completed) {
+        input.disabled = true;
+        checkBtn.disabled = true;
+        revealBtn.disabled = true;
+
+        if (state.status === 'correct') {
+          input.value = state.chosen || item.ans;
+          card.className = 'card correct-card';
+          feedback.className = 'feedback correct';
+          feedback.innerHTML = `✓ Correct! <div class="correct-answer-display">Answer: <strong>${item.ans}</strong></div>`;
+        } else {
+          card.className = 'card revealed-card';
+          feedback.className = 'feedback revealed';
+          feedback.innerHTML = `Answer revealed: <div class="correct-answer-display"><strong>${item.ans}</strong></div>`;
+        }
+      }
+
       function handleCheck() {
-        if (isCompleted) return;
+        if (state.completed) return;
         const userVal = input.value.trim();
         if (!userVal) return;
 
@@ -472,7 +529,9 @@ function renderQuiz() {
         const isCorrect = validAnswers.some(ans => cleanString(ans) === userClean);
 
         if (isCorrect) {
-          isCompleted = true;
+          userProgress[index] = { completed: true, status: 'correct', chosen: userVal };
+          saveProgress();
+
           input.disabled = true;
           checkBtn.disabled = true;
           revealBtn.disabled = true;
@@ -481,8 +540,6 @@ function renderQuiz() {
           feedback.className = 'feedback correct';
           feedback.innerHTML = `✓ Correct! <div class="correct-answer-display">Answer: <strong>${item.ans}</strong></div>`;
 
-          score++;
-          completedCount++;
           updateBanner();
         } else {
           card.className = 'card try-again-card';
@@ -497,8 +554,10 @@ function renderQuiz() {
       }
 
       function handleReveal() {
-        if (isCompleted) return;
-        isCompleted = true;
+        if (state.completed) return;
+        userProgress[index] = { completed: true, status: 'revealed', chosen: null };
+        saveProgress();
+
         input.disabled = true;
         checkBtn.disabled = true;
         revealBtn.disabled = true;
@@ -507,7 +566,6 @@ function renderQuiz() {
         feedback.className = 'feedback revealed';
         feedback.innerHTML = `Answer revealed: <div class="correct-answer-display"><strong>${item.ans}</strong></div>`;
 
-        completedCount++;
         updateBanner();
       }
 
@@ -527,9 +585,9 @@ function renderQuiz() {
       card.appendChild(row);
 
     } else {
-      // Multiple Choice Mode
-      const distractors = shuffle(allAnswers.filter(a => a !== item.ans)).slice(0, 3);
-      const choices = shuffle([item.ans, ...distractors]);
+      // Multiple Choice Mode: seeded shuffle keeps the choices in the same positions
+      const distractors = seededShuffle(allAnswers.filter(a => a !== item.ans), index * 31 + 7).slice(0, 3);
+      const choices = seededShuffle([item.ans, ...distractors], index * 17 + 3);
 
       const grid = document.createElement('div');
       grid.className = 'options-grid';
@@ -540,18 +598,29 @@ function renderQuiz() {
         btn.className = 'option-btn';
         btn.innerText = choice;
 
-        btn.onclick = () => {
-          if (isCompleted) return;
-          isCompleted = true;
-          buttons.forEach(b => b.disabled = true);
-          completedCount++;
-
+        if (state.completed) {
+          btn.disabled = true;
           if (choice === item.ans) {
+            btn.classList.add('correct');
+          }
+          if (state.status === 'wrong' && state.chosen === choice) {
+            btn.classList.add('wrong');
+          }
+        }
+
+        btn.onclick = () => {
+          if (state.completed) return;
+          const isRight = (choice === item.ans);
+          userProgress[index] = { completed: true, status: isRight ? 'correct' : 'wrong', chosen: choice };
+          saveProgress();
+
+          buttons.forEach(b => b.disabled = true);
+
+          if (isRight) {
             card.className = 'card correct-card';
             btn.classList.add('correct');
             feedback.className = 'feedback correct';
             feedback.innerHTML = `✓ Correct!`;
-            score++;
           } else {
             card.className = 'card wrong-card';
             btn.classList.add('wrong');
@@ -568,15 +637,32 @@ function renderQuiz() {
         grid.appendChild(btn);
       });
 
+      // Restore past feedback in MCQ
+      if (state.completed) {
+        if (state.status === 'correct') {
+          card.className = 'card correct-card';
+          feedback.className = 'feedback correct';
+          feedback.innerHTML = `✓ Correct!`;
+        } else {
+          card.className = 'card wrong-card';
+          feedback.className = 'feedback wrong';
+          feedback.innerHTML = `✗ ${state.status === 'revealed' ? 'Revealed' : 'Incorrect'}. Correct: <strong>${item.ans}</strong>`;
+        }
+      }
+
       card.appendChild(grid);
     }
 
     card.appendChild(feedback);
     container.appendChild(card);
   });
+
+  updateBanner();
 }
 
-// Initial Render
+// Initial mode button highlight & render
+document.getElementById('btn-mode-ident').classList.toggle('active', currentMode === 'identification');
+document.getElementById('btn-mode-mcq').classList.toggle('active', currentMode === 'mcq');
 renderQuiz();
 </script>
 </body>
