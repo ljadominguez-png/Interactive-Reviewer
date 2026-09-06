@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Operating Systems Reviewer</title>
+  <title>Practice Reviewer</title>
   <link rel="stylesheet" href="style.css"/>
   <script src="intro_to_ai_lesson3.js"></script>
   <script src="os_data_lesson1_to_3.js"></script>
   <script src="PL_lesson3.js"></script>
   <script src="PL_lesson2.js"></script>
 </head>
-
 <body>
 
   <div class="container">
     <header>
-      <h1>Operating Systems: Practice Reviewer</h1>
+      <h1>Practice Reviewer</h1>
       <div class="subtitle" id="mode-hint">Type your answer, retry if needed, or reveal the answer.</div>
     </header>
 
@@ -25,9 +23,9 @@
         <div class="controls-left">
           <select id="subject-select" class="subject-select" onchange="onSubjectChange(this.value)"></select>
           <div class="toggle-group">
-            <button class="toggle-btn active" id="btn-mode-ident" onclick="switchMode('identification')">Identification
-              (Fill-in)</button>
+            <button class="toggle-btn active" id="btn-mode-ident" onclick="switchMode('identification')">Identification</button>
             <button class="toggle-btn" id="btn-mode-mcq" onclick="switchMode('mcq')">Multiple Choice</button>
+            <button class="toggle-btn" id="btn-mode-fc" onclick="switchMode('flashcard')">Flashcards</button>
           </div>
         </div>
         <div style="display: flex; gap: 8px; align-items: center;">
@@ -36,8 +34,8 @@
         </div>
       </div>
       <div class="stats-row">
-        <span id="score">Score: 0 / 110</span>
-        <span id="progress">Progress: 0 / 110 completed</span>
+        <span id="score">Score: 0 / 0</span>
+        <span id="progress">Progress: 0 / 0 completed</span>
       </div>
     </div>
 
@@ -45,54 +43,47 @@
   </div>
 
   <script>
-const stickyNav = document.querySelector('.sticky-nav');
-let isTicking = false;
-let userManuallyExpanded = false;
-let expandScrollY = 0; // Tracks scroll offset when manually tapped
+    // --- Sticky Nav Scroll & Tap Logic ---
+    const stickyNav = document.querySelector('.sticky-nav');
+    let isTicking = false;
+    let userManuallyExpanded = false;
+    let expandScrollY = 0;
 
-window.addEventListener('scroll', () => {
-  if (!isTicking) {
-    window.requestAnimationFrame(() => {
-      const scrollY = window.scrollY;
-
-      // Always reset and show fully near the very top
-      if (scrollY < 80) {
-        stickyNav.classList.remove('collapsed');
-        userManuallyExpanded = false;
-      } 
-      // If user manually tapped expand, allow them to view controls until they scroll 80px away
-      else if (userManuallyExpanded) {
-        if (Math.abs(scrollY - expandScrollY) > 80) {
-          userManuallyExpanded = false;
-          stickyNav.classList.add('collapsed');
-        }
-      } 
-      // Normal auto-collapse when scrolling down past the header
-      else if (scrollY > 220) {
-        stickyNav.classList.add('collapsed');
+    window.addEventListener('scroll', () => {
+      if (!isTicking) {
+        window.requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          if (scrollY < 80) {
+            stickyNav.classList.remove('collapsed');
+            userManuallyExpanded = false;
+          } else if (userManuallyExpanded) {
+            if (Math.abs(scrollY - expandScrollY) > 80) {
+              userManuallyExpanded = false;
+              stickyNav.classList.add('collapsed');
+            }
+          } else if (scrollY > 220) {
+            stickyNav.classList.add('collapsed');
+          }
+          isTicking = false;
+        });
+        isTicking = true;
       }
+    }, { passive: true });
 
-      isTicking = false;
+    stickyNav.addEventListener('click', () => {
+      if (stickyNav.classList.contains('collapsed')) {
+        stickyNav.classList.remove('collapsed');
+        userManuallyExpanded = true;
+        expandScrollY = window.scrollY;
+      }
     });
-    isTicking = true;
-  }
-}, { passive: true });
 
-// Tap pill to expand
-stickyNav.addEventListener('click', () => {
-  if (stickyNav.classList.contains('collapsed')) {
-    stickyNav.classList.remove('collapsed');
-    userManuallyExpanded = true;
-    expandScrollY = window.scrollY; // Store the exact position of the tap
-  }
-});
-
+    // --- Theme Handling ---
     const THEME_KEY = 'app_theme';
 
     function initTheme() {
       const savedTheme = localStorage.getItem(THEME_KEY);
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
       if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
         document.body.classList.add('dark-mode');
         document.getElementById('btn-theme').innerText = '☀️';
@@ -109,6 +100,7 @@ stickyNav.addEventListener('click', () => {
     }
     initTheme();
 
+    // --- State & Registry ---
     const registry = window.quizRegistry || {};
     const subjectKeys = Object.keys(registry);
     const MODE_KEY = 'active_mode';
@@ -122,6 +114,7 @@ stickyNav.addEventListener('click', () => {
     let quizData = registry[currentSubjectKey] ? registry[currentSubjectKey].data : [];
     let allAnswers = [...new Set(quizData.map(d => d.ans))];
     let userProgress = loadProgress();
+    let fcIndex = 0; // State pointer for Flashcard Deck Mode
 
     function getStorageKey() {
       return `progress_${currentSubjectKey}`;
@@ -139,10 +132,9 @@ stickyNav.addEventListener('click', () => {
     function saveProgress() {
       try {
         localStorage.setItem(getStorageKey(), JSON.stringify(userProgress));
-      } catch (e) { }
+      } catch (e) {}
     }
 
-    // 1. Populates the dropdown menu with all imported subjects
     function populateSubjectDropdown() {
       const select = document.getElementById('subject-select');
       select.innerHTML = '';
@@ -155,13 +147,13 @@ stickyNav.addEventListener('click', () => {
       });
     }
 
-    // 2. Handles switching subjects when the user picks one
     function onSubjectChange(newKey) {
       currentSubjectKey = newKey;
       localStorage.setItem('active_subject', newKey);
       quizData = registry[currentSubjectKey] ? registry[currentSubjectKey].data : [];
       allAnswers = [...new Set(quizData.map(d => d.ans))];
       userProgress = loadProgress();
+      fcIndex = 0;
 
       const header = document.querySelector('header h1');
       if (header && registry[currentSubjectKey]) {
@@ -215,12 +207,15 @@ stickyNav.addEventListener('click', () => {
 
       document.getElementById('btn-mode-ident').classList.toggle('active', mode === 'identification');
       document.getElementById('btn-mode-mcq').classList.toggle('active', mode === 'mcq');
+      document.getElementById('btn-mode-fc').classList.toggle('active', mode === 'flashcard');
 
       const hint = document.getElementById('mode-hint');
       if (mode === 'identification') {
         hint.innerText = "Type your answer, retry if needed, or reveal the answer.";
-      } else {
+      } else if (mode === 'mcq') {
         hint.innerText = "Select an option for instant feedback.";
+      } else {
+        hint.innerText = "Review one question at a time. Click card or press Space to flip.";
       }
 
       renderQuiz();
@@ -236,9 +231,141 @@ stickyNav.addEventListener('click', () => {
       }
     }
 
+    // --- Core Renderer ---
     function renderQuiz() {
       const container = document.getElementById('quiz-container');
       container.innerHTML = '';
+
+      if (quizData.length === 0) {
+        container.innerHTML = `<div class="card" style="text-align:center;">No questions found for this subject.</div>`;
+        return;
+      }
+
+      // ==========================================
+      // FLASHCARD MODE: SINGLE CARD DECK VIEW
+      // ==========================================
+      if (currentMode === 'flashcard') {
+        if (fcIndex >= quizData.length) fcIndex = 0;
+        const item = quizData[fcIndex];
+        const state = userProgress[fcIndex] || { completed: false, status: null };
+
+        const deck = document.createElement('div');
+        deck.className = 'fc-deck-container';
+
+        // Progress Pill & Counter
+        const status = document.createElement('div');
+        status.className = 'fc-status-pill';
+        status.innerText = `Card ${fcIndex + 1} of ${quizData.length} • Section: ${item.sec}`;
+        deck.appendChild(status);
+
+        // Progress Bar
+        const barContainer = document.createElement('div');
+        barContainer.className = 'fc-progress-container';
+        const barFill = document.createElement('div');
+        barFill.className = 'fc-progress-fill';
+        barFill.style.width = `${((fcIndex + 1) / quizData.length) * 100}%`;
+        barContainer.appendChild(barFill);
+        deck.appendChild(barContainer);
+
+        // 3D Card Structure
+        const cardWrapper = document.createElement('div');
+        cardWrapper.className = 'fc-card-wrapper';
+
+        const flipper = document.createElement('div');
+        flipper.className = 'fc-flipper';
+
+        // Front Face
+        const front = document.createElement('div');
+        front.className = 'fc-face fc-front';
+        front.innerHTML = `
+          <div class="fc-label">Question</div>
+          <div class="fc-text">${item.q}</div>
+          <div class="fc-hint">Click card to reveal answer</div>
+        `;
+
+        // Back Face
+        const back = document.createElement('div');
+        back.className = 'fc-face fc-back';
+        back.innerHTML = `
+          <div class="fc-label">Answer</div>
+          <div class="fc-text fc-answer">${item.ans}</div>
+          <div class="fc-hint">Click card to hide answer</div>
+        `;
+
+        // Grade Action buttons on Back Face
+        const gradeActions = document.createElement('div');
+        gradeActions.className = 'fc-grade-actions';
+
+        const passBtn = document.createElement('button');
+        passBtn.className = 'fc-grade-btn fc-pass';
+        passBtn.innerText = '✓ I Knew It';
+        passBtn.onclick = (e) => {
+          e.stopPropagation();
+          userProgress[fcIndex] = { completed: true, status: 'correct', chosen: item.ans };
+          saveProgress();
+          updateBanner();
+          fcIndex = (fcIndex + 1) % quizData.length;
+          renderQuiz();
+        };
+
+        const failBtn = document.createElement('button');
+        failBtn.className = 'fc-grade-btn fc-fail';
+        failBtn.innerText = '✗ Missed It';
+        failBtn.onclick = (e) => {
+          e.stopPropagation();
+          userProgress[fcIndex] = { completed: true, status: 'wrong', chosen: null };
+          saveProgress();
+          updateBanner();
+          fcIndex = (fcIndex + 1) % quizData.length;
+          renderQuiz();
+        };
+
+        gradeActions.appendChild(passBtn);
+        gradeActions.appendChild(failBtn);
+        back.appendChild(gradeActions);
+
+        flipper.appendChild(front);
+        flipper.appendChild(back);
+        cardWrapper.appendChild(flipper);
+
+        cardWrapper.onclick = () => {
+          cardWrapper.classList.toggle('flipped');
+        };
+
+        deck.appendChild(cardWrapper);
+
+        // Deck Controls
+        const controls = document.createElement('div');
+        controls.className = 'fc-controls';
+
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'fc-ctrl-btn';
+        prevBtn.innerText = '← Previous';
+        prevBtn.onclick = () => {
+          fcIndex = (fcIndex - 1 + quizData.length) % quizData.length;
+          renderQuiz();
+        };
+
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'fc-ctrl-btn';
+        nextBtn.innerText = 'Next →';
+        nextBtn.onclick = () => {
+          fcIndex = (fcIndex + 1) % quizData.length;
+          renderQuiz();
+        };
+
+        controls.appendChild(prevBtn);
+        controls.appendChild(nextBtn);
+        deck.appendChild(controls);
+
+        container.appendChild(deck);
+        updateBanner();
+        return;
+      }
+
+      // ==========================================
+      // IDENTIFICATION & MCQ MODES: FULL LIST VIEW
+      // ==========================================
       let activeSection = '';
 
       quizData.forEach((item, index) => {
@@ -260,9 +387,9 @@ stickyNav.addEventListener('click', () => {
 
         const feedback = document.createElement('div');
         feedback.className = 'feedback';
-
         const state = userProgress[index] || { completed: false, status: null, chosen: null };
 
+        // 1. IDENTIFICATION
         if (currentMode === 'identification') {
           const row = document.createElement('div');
           row.className = 'input-row';
@@ -308,21 +435,17 @@ stickyNav.addEventListener('click', () => {
             if (isCorrect) {
               userProgress[index] = { completed: true, status: 'correct', chosen: userVal };
               saveProgress();
-
               input.disabled = true;
               checkBtn.disabled = true;
               revealBtn.disabled = true;
-
               card.className = 'card correct-card';
               feedback.className = 'feedback correct';
               feedback.innerHTML = `✓ Correct! <div class="correct-answer-display">Answer: <strong>${item.ans}</strong></div>`;
-
               updateBanner();
             } else {
               card.className = 'card try-again-card';
               feedback.className = 'feedback try-again';
               feedback.innerText = '✗ Not quite. Try again, or click Reveal if stuck!';
-
               input.classList.remove('shake');
               void input.offsetWidth;
               input.classList.add('shake');
@@ -334,15 +457,12 @@ stickyNav.addEventListener('click', () => {
             if (state.completed) return;
             userProgress[index] = { completed: true, status: 'revealed', chosen: null };
             saveProgress();
-
             input.disabled = true;
             checkBtn.disabled = true;
             revealBtn.disabled = true;
-
             card.className = 'card revealed-card';
             feedback.className = 'feedback revealed';
             feedback.innerHTML = `Answer revealed: <div class="correct-answer-display"><strong>${item.ans}</strong></div>`;
-
             updateBanner();
           }
 
@@ -360,8 +480,10 @@ stickyNav.addEventListener('click', () => {
           row.appendChild(checkBtn);
           row.appendChild(revealBtn);
           card.appendChild(row);
+          card.appendChild(feedback);
 
-        } else {
+        // 2. MULTIPLE CHOICE
+        } else if (currentMode === 'mcq') {
           const distractors = seededShuffle(allAnswers.filter(a => a !== item.ans), index * 31 + 7).slice(0, 3);
           const choices = seededShuffle([item.ans, ...distractors], index * 17 + 3);
 
@@ -376,12 +498,8 @@ stickyNav.addEventListener('click', () => {
 
             if (state.completed) {
               btn.disabled = true;
-              if (choice === item.ans) {
-                btn.classList.add('correct');
-              }
-              if (state.status === 'wrong' && state.chosen === choice) {
-                btn.classList.add('wrong');
-              }
+              if (choice === item.ans) btn.classList.add('correct');
+              if (state.status === 'wrong' && state.chosen === choice) btn.classList.add('wrong');
             }
 
             btn.onclick = () => {
@@ -405,7 +523,6 @@ stickyNav.addEventListener('click', () => {
                 feedback.className = 'feedback wrong';
                 feedback.innerHTML = `✗ Incorrect. Correct: <strong>${item.ans}</strong>`;
               }
-
               updateBanner();
             };
 
@@ -426,16 +543,32 @@ stickyNav.addEventListener('click', () => {
           }
 
           card.appendChild(grid);
+          card.appendChild(feedback);
         }
 
-        card.appendChild(feedback);
         container.appendChild(card);
       });
 
       updateBanner();
     }
 
-    // 3. Initialize Everything
+    // Keyboard navigation for Flashcard Deck mode
+    document.addEventListener('keydown', (e) => {
+      if (currentMode !== 'flashcard' || quizData.length === 0) return;
+      if (e.code === 'Space') {
+        e.preventDefault();
+        const wrapper = document.querySelector('.fc-card-wrapper');
+        if (wrapper) wrapper.classList.toggle('flipped');
+      } else if (e.key === 'ArrowRight') {
+        fcIndex = (fcIndex + 1) % quizData.length;
+        renderQuiz();
+      } else if (e.key === 'ArrowLeft') {
+        fcIndex = (fcIndex - 1 + quizData.length) % quizData.length;
+        renderQuiz();
+      }
+    });
+
+    // --- Boot ---
     populateSubjectDropdown();
     if (registry[currentSubjectKey]) {
       const header = document.querySelector('header h1');
@@ -443,8 +576,8 @@ stickyNav.addEventListener('click', () => {
     }
     document.getElementById('btn-mode-ident').classList.toggle('active', currentMode === 'identification');
     document.getElementById('btn-mode-mcq').classList.toggle('active', currentMode === 'mcq');
+    document.getElementById('btn-mode-fc').classList.toggle('active', currentMode === 'flashcard');
     renderQuiz();
   </script>
 </body>
-
 </html>
