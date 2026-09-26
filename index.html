@@ -1,3 +1,4 @@
+<!--Yes this is a vibe coded web-app no need to be soo OA-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,12 +31,13 @@
         <div class="controls-left">
           <select id="subject-select" class="subject-select" onchange="onSubjectChange(this.value)"></select>
           <div class="toggle-group">
-            <button class="toggle-btn active" id="btn-mode-ident" onclick="switchMode('identification')">Identification</button>
-            <button class="toggle-btn" id="btn-mode-mcq" onclick="switchMode('mcq')">Multiple Choice</button>
-            <button class="toggle-btn" id="btn-mode-fc" onclick="switchMode('flashcard')">Flashcards</button>
+            <button class="toggle-btn active" id="btn-mode-ident" onclick="switchMode('identification')">Fill-in</button>
+            <button class="toggle-btn" id="btn-mode-mcq" onclick="switchMode('mcq')">MCQ</button>
+            <button class="toggle-btn" id="btn-mode-fc" onclick="switchMode('flashcard')">Cards</button>
           </div>
         </div>
         <div style="display: flex; gap: 8px; align-items: center;">
+          <button class="btn-shuffle" id="btn-shuffle" onclick="shuffleQuestions()" title="Shuffle Question Order">🔀</button>
           <button class="btn-theme" id="btn-theme" onclick="toggleDarkMode()" title="Toggle Theme">🌙</button>
           <button class="btn-reset" onclick="confirmReset()">Clear Progress</button>
         </div>
@@ -118,10 +120,20 @@
     }
 
     let currentMode = localStorage.getItem(MODE_KEY) || 'identification';
-    let quizData = registry[currentSubjectKey] ? registry[currentSubjectKey].data : [];
-    let allAnswers = [...new Set(quizData.map(d => d.ans))];
+    let quizData = [];
+    let allAnswers = [];
     let userProgress = loadProgress();
-    let fcIndex = 0; // State pointer for Flashcard Deck Mode
+    let fcIndex = 0;
+
+    function initQuizData(subjectKey) {
+      const rawData = registry[subjectKey] ? registry[subjectKey].data : [];
+      // Tag each item with its original array index to guarantee persistent progress tracking
+      quizData = rawData.map((item, index) => ({
+        ...item,
+        _origId: index
+      }));
+      allAnswers = [...new Set(quizData.map(d => d.ans))];
+    }
 
     function getStorageKey() {
       return `progress_${currentSubjectKey}`;
@@ -142,6 +154,23 @@
       } catch (e) {}
     }
 
+    // Modern Fisher-Yates shuffle
+    function shuffleArray(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function shuffleQuestions() {
+      if (quizData.length <= 1) return;
+      quizData = shuffleArray(quizData);
+      fcIndex = 0;
+      renderQuiz();
+    }
+
     function populateSubjectDropdown() {
       const select = document.getElementById('subject-select');
       select.innerHTML = '';
@@ -157,8 +186,7 @@
     function onSubjectChange(newKey) {
       currentSubjectKey = newKey;
       localStorage.setItem('active_subject', newKey);
-      quizData = registry[currentSubjectKey] ? registry[currentSubjectKey].data : [];
-      allAnswers = [...new Set(quizData.map(d => d.ans))];
+      initQuizData(currentSubjectKey);
       userProgress = loadProgress();
       fcIndex = 0;
 
@@ -194,7 +222,8 @@
       let completed = 0;
 
       for (let i = 0; i < quizData.length; i++) {
-        const state = userProgress[i];
+        const origId = quizData[i]._origId;
+        const state = userProgress[origId];
         if (state && state.completed) {
           completed++;
           if (state.status === 'correct') {
@@ -254,18 +283,17 @@
       if (currentMode === 'flashcard') {
         if (fcIndex >= quizData.length) fcIndex = 0;
         const item = quizData[fcIndex];
-        const state = userProgress[fcIndex] || { completed: false, status: null };
+        const origId = item._origId;
+        const state = userProgress[origId] || { completed: false, status: null };
 
         const deck = document.createElement('div');
         deck.className = 'fc-deck-container';
 
-        // Progress Pill & Counter
         const status = document.createElement('div');
         status.className = 'fc-status-pill';
         status.innerText = `Card ${fcIndex + 1} of ${quizData.length} • Section: ${item.sec}`;
         deck.appendChild(status);
 
-        // Progress Bar
         const barContainer = document.createElement('div');
         barContainer.className = 'fc-progress-container';
         const barFill = document.createElement('div');
@@ -274,14 +302,12 @@
         barContainer.appendChild(barFill);
         deck.appendChild(barContainer);
 
-        // 3D Card Structure
         const cardWrapper = document.createElement('div');
         cardWrapper.className = 'fc-card-wrapper';
 
         const flipper = document.createElement('div');
         flipper.className = 'fc-flipper';
 
-        // Front Face
         const front = document.createElement('div');
         front.className = 'fc-face fc-front';
         front.innerHTML = `
@@ -290,7 +316,6 @@
           <div class="fc-hint">Click card to reveal answer</div>
         `;
 
-        // Back Face
         const back = document.createElement('div');
         back.className = 'fc-face fc-back';
         back.innerHTML = `
@@ -299,7 +324,6 @@
           <div class="fc-hint">Click card to hide answer</div>
         `;
 
-        // Grade Action buttons on Back Face
         const gradeActions = document.createElement('div');
         gradeActions.className = 'fc-grade-actions';
 
@@ -308,7 +332,7 @@
         passBtn.innerText = '✓ I Knew It';
         passBtn.onclick = (e) => {
           e.stopPropagation();
-          userProgress[fcIndex] = { completed: true, status: 'correct', chosen: item.ans };
+          userProgress[origId] = { completed: true, status: 'correct', chosen: item.ans };
           saveProgress();
           updateBanner();
           fcIndex = (fcIndex + 1) % quizData.length;
@@ -320,7 +344,7 @@
         failBtn.innerText = '✗ Missed It';
         failBtn.onclick = (e) => {
           e.stopPropagation();
-          userProgress[fcIndex] = { completed: true, status: 'wrong', chosen: null };
+          userProgress[origId] = { completed: true, status: 'wrong', chosen: null };
           saveProgress();
           updateBanner();
           fcIndex = (fcIndex + 1) % quizData.length;
@@ -341,7 +365,6 @@
 
         deck.appendChild(cardWrapper);
 
-        // Deck Controls
         const controls = document.createElement('div');
         controls.className = 'fc-controls';
 
@@ -376,6 +399,7 @@
       let activeSection = '';
 
       quizData.forEach((item, index) => {
+        // In randomized view, render section headers when the section transitions
         if (item.sec !== activeSection) {
           activeSection = item.sec;
           const header = document.createElement('div');
@@ -394,7 +418,10 @@
 
         const feedback = document.createElement('div');
         feedback.className = 'feedback';
-        const state = userProgress[index] || { completed: false, status: null, chosen: null };
+        
+        // Key progress off the stable _origId
+        const origId = item._origId;
+        const state = userProgress[origId] || { completed: false, status: null, chosen: null };
 
         // 1. IDENTIFICATION
         if (currentMode === 'identification') {
@@ -440,7 +467,7 @@
             const isCorrect = validAnswers.some(ans => cleanString(ans) === userClean);
 
             if (isCorrect) {
-              userProgress[index] = { completed: true, status: 'correct', chosen: userVal };
+              userProgress[origId] = { completed: true, status: 'correct', chosen: userVal };
               saveProgress();
               input.disabled = true;
               checkBtn.disabled = true;
@@ -462,7 +489,7 @@
 
           function handleReveal() {
             if (state.completed) return;
-            userProgress[index] = { completed: true, status: 'revealed', chosen: null };
+            userProgress[origId] = { completed: true, status: 'revealed', chosen: null };
             saveProgress();
             input.disabled = true;
             checkBtn.disabled = true;
@@ -491,8 +518,9 @@
 
         // 2. MULTIPLE CHOICE
         } else if (currentMode === 'mcq') {
-          const distractors = seededShuffle(allAnswers.filter(a => a !== item.ans), index * 31 + 7).slice(0, 3);
-          const choices = seededShuffle([item.ans, ...distractors], index * 17 + 3);
+          // Use origId as salt so distractors remain stable for each question
+          const distractors = seededShuffle(allAnswers.filter(a => a !== item.ans), origId * 31 + 7).slice(0, 3);
+          const choices = seededShuffle([item.ans, ...distractors], origId * 17 + 3);
 
           const grid = document.createElement('div');
           grid.className = 'options-grid';
@@ -512,7 +540,7 @@
             btn.onclick = () => {
               if (state.completed) return;
               const isRight = (choice === item.ans);
-              userProgress[index] = { completed: true, status: isRight ? 'correct' : 'wrong', chosen: choice };
+              userProgress[origId] = { completed: true, status: isRight ? 'correct' : 'wrong', chosen: choice };
               saveProgress();
 
               buttons.forEach(b => b.disabled = true);
@@ -576,6 +604,7 @@
     });
 
     // --- Boot ---
+    initQuizData(currentSubjectKey);
     populateSubjectDropdown();
     if (registry[currentSubjectKey]) {
       const header = document.querySelector('header h1');
