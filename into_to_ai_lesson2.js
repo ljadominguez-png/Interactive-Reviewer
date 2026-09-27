@@ -52,7 +52,7 @@ window.quizRegistry ['iai2'] = {
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "Which activation function maps any real-valued input strictly to a value between 0 and 1?",
+    "q": "Which activation function maps any real-valued input to a value between 0 and 1, making it useful for binary classification?",
     "ans": "Sigmoid Function",
     "alt": ["Sigmoid", "sigmoid"]
   },
@@ -64,73 +64,73 @@ window.quizRegistry ['iai2'] = {
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "Which activation function outputs the input directly if positive and zero otherwise?",
+    "q": "Which activation function is defined as a piecewise linear function that outputs the input directly if positive and zero otherwise?",
     "ans": "ReLU",
     "alt": ["Rectified Linear Unit"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "Which activation function transforms unnormalized prediction scores (logits) into probabilities summing up to 1?",
+    "q": "Which activation function transforms prediction scores called logits into probabilities that sum up to 1?",
     "ans": "Softmax",
     "alt": ["softmax", "Softmax function"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "What term refers to raw, unnormalized prediction scores before being transformed into probabilities by softmax?",
+    "q": "What term refers to prediction scores before they are transformed into probabilities by the softmax function?",
     "ans": "logits",
     "alt": ["Logits"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "What parameter is a numerical value assigned to each connection that determines the strength of the connection between two neurons?",
+    "q": "What numerical parameter on each connection determines the strength of the connection between two neurons?",
     "ans": "weight",
     "alt": ["Weight", "weights"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "What parameter added to the weighted input of a neuron allows the activation function to be shifted and enables activation even when inputs are zero?",
+    "q": "What value added to the input of a neuron allows the activation function to be shifted and enables activation even when all inputs are zero?",
     "ans": "bias",
     "alt": ["Bias", "biases"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "What two interdependent processes comprise the complete ANN learning process?",
+    "q": "What two interdependent processes work together to train a network in the ANN learning process?",
     "ans": "forward propagation and back propagation",
     "alt": ["forward propagation and backpropagation", "feedforward and backpropagation"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "In the learning analogy provided in the notes, what does backpropagation correspond to for a student?",
+    "q": "In the student learning analogy, what does backpropagation correspond to?",
     "ans": "student's process of correcting its mistakes",
     "alt": ["correcting mistakes", "correcting its mistakes"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "What mathematical calculus rule is used in backpropagation to compute the gradient of the loss with respect to each weight and bias?",
+    "q": "What calculus rule is used to compute the gradient of the loss function with respect to each weight and bias?",
     "ans": "chain rule",
     "alt": ["Chain Rule", "chain rule of calculus"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "What optimization algorithm adjusts weights and biases in the direction that minimizes the loss function?",
+    "q": "What optimization method uses computed gradients to update network parameters in the direction that minimizes loss?",
     "ans": "gradient descent",
     "alt": ["Gradient Descent", "gradient descent optimization"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "What hyperparameter determines the small step size by which parameters are adjusted during gradient descent?",
+    "q": "What hyperparameter determines the small step amount by which parameters are adjusted during gradient descent?",
     "ans": "learning rate",
-    "alt": ["Learning Rate", "eta"]
+    "alt": ["Learning Rate", "alpha"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "What benchmark dataset containing 70,000 grayscale fashion product images is used as a drop-in replacement for MNIST digits?",
+    "q": "What benchmark dataset containing 70,000 grayscale fashion product images is used as a direct replacement for the original MNIST dataset?",
     "ans": "Fashion MNIST",
     "alt": ["Fashion-MNIST", "fashion mnist"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "What is the image resolution (pixel dimensions) of images in the Fashion-MNIST dataset?",
+    "q": "What are the pixel dimensions of the grayscale images in the Fashion MNIST dataset?",
     "ans": "28x28",
     "alt": ["28 x 28", "28 by 28", "(28, 28)"]
   },
@@ -142,403 +142,385 @@ window.quizRegistry ['iai2'] = {
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "What Google cloud platform provides free access to GPUs and TPUs for machine learning workflows?",
+    "q": "What hosted platform providing free access to GPUs and TPUs is utilized in the lesson to run notebooks without manual setup?",
     "ans": "Google Colab",
     "alt": ["Colab", "Google Colaboratory"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "How many total training samples (x_train observations) are in the Fashion-MNIST dataset?",
-    "ans": "60,000",
-    "alt": ["60000"]
+    "q": "How many total grayscale images are contained in the entire Fashion-MNIST dataset?",
+    "ans": "70,000",
+    "alt": ["70000"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "How many test samples (x_test observations) are in the Fashion-MNIST dataset?",
-    "ans": "10,000",
-    "alt": ["10000"]
-  },
-  {
-    "sec": "ANN Concepts & Architecture",
-    "q": "What process transforms a multi-dimensional matrix of values into a one-dimensional vector before feeding it into dense layers?",
+    "q": "What process transforms a multi-dimensional matrix of values into a vector of values before feeding into dense layers?",
     "ans": "Flattening",
     "alt": ["flattening", "Flatten"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "What open-source Python library was utilized in the notes to create and launch the interactive web demo for model deployment?",
+    "q": "What web application library is used to deploy the Fashion-MNIST image classifier online?",
     "ans": "Gradio",
     "alt": ["gradio"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "What lightweight mobile/embedded deployment model format was loaded using the TensorFlow interpreter in Listing 2.9?",
+    "q": "What lightweight model format is loaded using tf.lite.Interpreter in Listing 2.9?",
     "ans": "TFLite",
     "alt": ["tflite", ".tflite", "TensorFlow Lite"]
   },
   {
     "sec": "ANN Concepts & Architecture",
-    "q": "What visualization tool combines a confusion matrix with color intensity to evaluate classification performance?",
-    "ans": "heat map",
-    "alt": ["heatmap", "Confusion Matrix heatmap"]
+    "q": "What visual matrix representation plotted with Seaborn displays true versus predicted labels across classes?",
+    "ans": "Confusion Matrix",
+    "alt": ["confusion matrix"]
   },
   {
-    "sec": "Forward Propagation Computations",
-    "q": "Given an input x1 = 2, weight w1 = 0.5, and bias b1 = 0.2, calculate the linear combination z1 = x1 * w1 + b1.",
-    "ans": "1.2",
-    "alt": ["1.20"]
+    "sec": "Forward & Backward Computations",
+    "q": "In the lesson example with x1 = 1, w1 = 0.5, and b1 = 1, what is the exact calculated value of z1 = w1 * x1 + b1?",
+    "ans": "1.5",
+    "alt": ["1.50"]
   },
   {
-    "sec": "Forward Propagation Computations",
-    "q": "Given an input x1 = 4, weight w1 = -0.5, and bias b1 = 1.0, calculate z1 = x1 * w1 + b1.",
-    "ans": "-1",
-    "alt": ["-1.0", "-1.00"]
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 2 of forward propagation, what is the rounded value of o1 = 1 / (1 + e^(-1.5)) given in the text?",
+    "ans": "0.82",
+    "alt": ["0.820"]
   },
   {
-    "sec": "Forward Propagation Computations",
-    "q": "Given z1 = 0, evaluate the sigmoid activation 1 / (1 + e^(-0)).",
-    "ans": "0.5",
-    "alt": ["0.50"]
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 3, using w2 = 0.25, o1 = 0.82, and b2 = 0.75, what is the computed value of z2 = 0.25 * 0.82 + 0.75?",
+    "ans": "0.95",
+    "alt": ["0.955", "0.950"]
   },
   {
-    "sec": "Forward Propagation Computations",
-    "q": "Given z1 = 2, what is the output of the ReLU activation function ReLU(z1) = max(0, z1)?",
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 4, what is the rounded output value o2 = 1 / (1 + e^(-0.95)) given as the final network prediction y_hat?",
+    "ans": "0.72",
+    "alt": ["0.720"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "In Table 2.0, what is the actual target value y associated with the predicted value y_hat = 0.721?",
     "ans": "2",
     "alt": ["2.0"]
   },
   {
-    "sec": "Forward Propagation Computations",
-    "q": "Given z1 = -4.5, what is the output of the ReLU activation function ReLU(z1)?",
-    "ans": "0",
-    "alt": ["0.0"]
+    "sec": "Forward & Backward Computations",
+    "q": "In Table 2.0, what is the actual target value y associated with the predicted value y_hat = 0.725?",
+    "ans": "4",
+    "alt": ["4.0"]
   },
   {
-    "sec": "Forward Propagation Computations",
-    "q": "Given hidden activation a1 = 0.6, weight w2 = 1.5, and bias b2 = 0.1, compute the linear output z2 = a1 * w2 + b2.",
-    "ans": "1",
-    "alt": ["1.0", "1.00"]
+    "sec": "Forward & Backward Computations",
+    "q": "In Table 2.0, what is the actual target value y associated with the predicted value y_hat = 0.727?",
+    "ans": "6",
+    "alt": ["6.0"]
   },
   {
-    "sec": "Forward Propagation Computations",
-    "q": "Given hidden activation a1 = 0.8, weight w2 = -0.5, and bias b2 = 0.4, compute z2 = a1 * w2 + b2.",
-    "ans": "0",
-    "alt": ["0.0", "0.00"]
+    "sec": "Forward & Backward Computations",
+    "q": "In Table 2.0, what is the actual target value y associated with the predicted value y_hat = 0.728?",
+    "ans": "8",
+    "alt": ["8.0"]
   },
   {
-    "sec": "Forward Propagation Computations",
-    "q": "Given z2 = 0, evaluate the final sigmoid prediction y_hat = sigmoid(z2).",
-    "ans": "0.5",
-    "alt": ["0.50"]
+    "sec": "Forward & Backward Computations",
+    "q": "In Table 2.0, what is the actual target value y associated with the predicted value y_hat = 0.729?",
+    "ans": "10",
+    "alt": ["10.0"]
   },
   {
-    "sec": "Forward Propagation Computations",
-    "q": "Given inputs x1 = 1, x2 = 2 with weights w1 = 0.3, w2 = 0.4 and bias b = 0.1, calculate the total sum z = x1*w1 + x2*w2 + b.",
-    "ans": "1.2",
-    "alt": ["1.20"]
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 1 of backpropagation, what is the total summed squared error E reported across the five samples?",
+    "ans": "178.99",
+    "alt": ["178.990"]
   },
   {
-    "sec": "Forward Propagation Computations",
-    "q": "Given inputs x1 = 3, x2 = -2 with weights w1 = 0.5, w2 = 1.0 and bias b = 0.5, calculate z = x1*w1 + x2*w2 + b.",
-    "ans": "0",
-    "alt": ["0.0"]
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 2.2, into what simplified expression in terms of y_hat does the sigmoid derivative dy_hat/dz2 simplify?",
+    "ans": "y_hat*(1-y_hat)",
+    "alt": ["y_hat * (1 - y_hat)", "y*(1-y)"]
   },
   {
-    "sec": "Forward Propagation Computations",
-    "q": "Given z = -3, what is the output of ReLU(z)?",
-    "ans": "0",
-    "alt": ["0.0"]
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 2.3, what does the partial derivative dz2/dw2 evaluate to given z2 = w2 * o1 + b2?",
+    "ans": "o1",
+    "alt": ["o_1"]
   },
   {
-    "sec": "Forward Propagation Computations",
-    "q": "Given two logits z = [0, 0], calculate the softmax probability for the first class: e^0 / (e^0 + e^0).",
-    "ans": "0.5",
-    "alt": ["0.50", "1/2"]
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 2.4, what numerical gradient result is given for dE/dw2 from multiplying the intermediate factors?",
+    "ans": "4046.56",
+    "alt": ["4046.560"]
   },
   {
-    "sec": "Forward Propagation Computations",
-    "q": "Given three equal logits [2, 2, 2], calculate the softmax probability for each individual class.",
-    "ans": "0.333",
-    "alt": ["1/3", "0.33", "0.3333"]
-  },
-  {
-    "sec": "Forward Propagation Computations",
-    "q": "Given an input pixel value of 127.5, compute its normalized value scaled to the [0, 1] range by dividing by 255.",
-    "ans": "0.5",
-    "alt": ["0.50"]
-  },
-  {
-    "sec": "Forward Propagation Computations",
-    "q": "Given an input pixel value of 51, compute its normalized value scaled to [0, 1] (51 / 255).",
-    "ans": "0.2",
-    "alt": ["0.20"]
-  },
-  {
-    "sec": "Forward Propagation Computations",
-    "q": "Given an input pixel value of 204, compute its normalized value scaled to [0, 1] (204 / 255).",
-    "ans": "0.8",
-    "alt": ["0.80"]
-  },
-  {
-    "sec": "Forward Propagation Computations",
-    "q": "In a 28 x 28 grayscale image, what is the total number of flattened input neurons?",
-    "ans": "784",
-    "alt": ["784 neurons"]
-  },
-  {
-    "sec": "Forward Propagation Computations",
-    "q": "For a dense layer connecting 784 flattened inputs to 128 hidden neurons, calculate the total number of connection weights (784 * 128).",
-    "ans": "100352",
-    "alt": ["100,352"]
-  },
-  {
-    "sec": "Forward Propagation Computations",
-    "q": "For a dense layer connecting 784 inputs to 128 neurons, what is the total number of trainable parameters including 128 biases?",
-    "ans": "100480",
-    "alt": ["100,480"]
-  },
-  {
-    "sec": "Forward Propagation Computations",
-    "q": "For a dense layer connecting 128 inputs to 64 neurons, calculate the total count of weights (128 * 64).",
-    "ans": "8192",
-    "alt": ["8,192"]
-  },
-  {
-    "sec": "Forward Propagation Computations",
-    "q": "For a dense layer connecting 128 inputs to 64 neurons, calculate the total parameter count including 64 biases (8192 + 64).",
-    "ans": "8256",
-    "alt": ["8,256"]
-  },
-  {
-    "sec": "Forward Propagation Computations",
-    "q": "For an output layer connecting 64 inputs to 10 neurons, calculate the total number of parameters including 10 biases ((64 * 10) + 10).",
-    "ans": "650",
-    "alt": ["650 params", "650 parameters"]
-  },
-  {
-    "sec": "Forward Propagation Computations",
-    "q": "Calculate the sum of trainable parameters across all layers: 100480 + 8256 + 650.",
-    "ans": "109386",
-    "alt": ["109,386"]
-  },
-  {
-    "sec": "Forward Propagation Computations",
-    "q": "If an image of dimension 32 x 32 is flattened, how many neurons will the input vector contain?",
-    "ans": "1024",
-    "alt": ["1,024"]
-  },
-  {
-    "sec": "Forward Propagation Computations",
-    "q": "Given x = 0.5, w = -0.4, and b = 0.2, calculate the linear sum z = x * w + b.",
-    "ans": "0",
-    "alt": ["0.0"]
-  },
-  {
-    "sec": "Backward Propagation Computations",
-    "q": "Given predicted value y_hat = 0.8 and actual target value y = 1.0, calculate the error difference e = (y_hat - y).",
-    "ans": "-0.2",
-    "alt": ["-0.20"]
-  },
-  {
-    "sec": "Backward Propagation Computations",
-    "q": "Given y_hat = 0.65 and y = 0.0, calculate the prediction error e = (y_hat - y).",
-    "ans": "0.65",
-    "alt": ["+0.65"]
-  },
-  {
-    "sec": "Backward Propagation Computations",
-    "q": "Using the simplified squared error derivative dL/dy_hat = (y_hat - y), find the derivative when y_hat = 0.7 and y = 0.5.",
-    "ans": "0.2",
-    "alt": ["0.20"]
-  },
-  {
-    "sec": "Backward Propagation Computations",
-    "q": "For a sigmoid output y_hat = 0.5, calculate the sigmoid derivative value dy_hat/dz2 = y_hat * (1 - y_hat).",
-    "ans": "0.25",
-    "alt": ["0.250"]
-  },
-  {
-    "sec": "Backward Propagation Computations",
-    "q": "For a sigmoid output y_hat = 0.8, calculate the sigmoid derivative value y_hat * (1 - y_hat).",
-    "ans": "0.16",
-    "alt": ["0.160"]
-  },
-  {
-    "sec": "Backward Propagation Computations",
-    "q": "For a sigmoid output y_hat = 0.2, calculate the sigmoid derivative value y_hat * (1 - y_hat).",
-    "ans": "0.16",
-    "alt": ["0.160"]
-  },
-  {
-    "sec": "Backward Propagation Computations",
-    "q": "Given linear output z2 = a1 * w2 + b2, what is the partial derivative dz2/dw2?",
-    "ans": "a1",
-    "alt": ["a_1", "activation of previous layer", "a1"]
-  },
-  {
-    "sec": "Backward Propagation Computations",
-    "q": "Given linear output z2 = a1 * w2 + b2, what is the partial derivative dz2/db2 with respect to the bias?",
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 2.5, what does the partial derivative dz2/db2 evaluate to?",
     "ans": "1",
     "alt": ["1.0", "one"]
   },
   {
-    "sec": "Backward Propagation Computations",
-    "q": "If dL/dy_hat = -0.2, dy_hat/dz2 = 0.25, and dz2/dw2 = 0.6, calculate dL/dw2 by multiplying the three terms (-0.2 * 0.25 * 0.6).",
-    "ans": "-0.03",
-    "alt": ["-0.030"]
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 2.5, what numerical gradient result is given for dE/db2?",
+    "ans": "890.18",
+    "alt": ["890.180"]
   },
   {
-    "sec": "Backward Propagation Computations",
-    "q": "If dL/dy_hat = 0.4, dy_hat/dz2 = 0.2, and dz2/db2 = 1, calculate dL/db2 by multiplying the terms (0.4 * 0.2 * 1).",
-    "ans": "0.08",
-    "alt": ["0.080"]
+    "sec": "Forward & Backward Computations",
+    "q": "What specific learning rate alpha value is used in Step 3 and Step 5 for updating weights and biases?",
+    "ans": "0.01",
+    "alt": ["0.010"]
   },
   {
-    "sec": "Backward Propagation Computations",
-    "q": "Given current weight w2 = 0.5, learning rate alpha = 0.1, and gradient dL/dw2 = 0.2, compute the updated weight: w2 - (alpha * dL/dw2).",
-    "ans": "0.48",
-    "alt": ["0.480"]
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 3, what is the resulting updated value of w2 after computing 0.25 - 0.01 * 4046.56?",
+    "ans": "-40.21",
+    "alt": ["-40.210"]
   },
   {
-    "sec": "Backward Propagation Computations",
-    "q": "Given current weight w2 = 0.4, learning rate alpha = 0.05, and gradient dL/dw2 = -0.4, compute the updated weight: w2 - (alpha * dL/dw2).",
-    "ans": "0.42",
-    "alt": ["0.420"]
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 3, what is the resulting updated value of b2 after computing 0.75 - 0.01 * 890.18?",
+    "ans": "-8.15",
+    "alt": ["-8.150"]
   },
   {
-    "sec": "Backward Propagation Computations",
-    "q": "Given current bias b2 = 0.1, learning rate alpha = 0.1, and gradient dL/db2 = 0.08, compute the updated bias: b2 - (alpha * dL/db2).",
-    "ans": "0.092",
-    "alt": ["0.0920"]
-  },
-  {
-    "sec": "Backward Propagation Computations",
-    "q": "Given weight w1 = 0.8, learning rate alpha = 0.2, and gradient dL/dw1 = 0.5, compute the updated weight w1 - (alpha * dL/dw1).",
-    "ans": "0.7",
-    "alt": ["0.70"]
-  },
-  {
-    "sec": "Backward Propagation Computations",
-    "q": "What is the derivative of the ReLU activation d/dz(ReLU(z)) for any input z > 0?",
-    "ans": "1",
-    "alt": ["1.0", "one"]
-  },
-  {
-    "sec": "Backward Propagation Computations",
-    "q": "What is the derivative of the ReLU activation d/dz(ReLU(z)) for any input z < 0?",
-    "ans": "0",
-    "alt": ["0.0", "zero"]
-  },
-  {
-    "sec": "Backward Propagation Computations",
-    "q": "Given z2 = a1 * w2 + b2, what is the partial derivative dz2/da1 with respect to the hidden unit activation?",
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 4, what does the partial derivative dz2/do1 evaluate to for the hidden connection?",
     "ans": "w2",
-    "alt": ["w_2", "the weight w2"]
+    "alt": ["w_2"]
   },
   {
-    "sec": "Backward Propagation Computations",
-    "q": "If dL/dz2 = 0.1 and w2 = 0.5, calculate the backpropagated gradient to the hidden activation dL/da1 = (dL/dz2) * w2.",
-    "ans": "0.05",
-    "alt": ["0.050"]
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 4, what does the partial derivative do1/dz1 evaluate to in terms of o1?",
+    "ans": "o1(1-o1)",
+    "alt": ["o1*(1-o1)", "o_1(1-o_1)"]
   },
   {
-    "sec": "Backward Propagation Computations",
-    "q": "If gradient dL/dw = 0, how much does the weight change after gradient descent update?",
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 4, what does the partial derivative dz1/dw1 evaluate to?",
+    "ans": "x1",
+    "alt": ["x_1"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 4, what numerical gradient result is given for dE/dw1?",
+    "ans": "1301.82",
+    "alt": ["1301.820"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 4, what does the partial derivative dz1/b1 evaluate to?",
+    "ans": "1",
+    "alt": ["1.0", "one"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 5, what is the resulting updated value of w1 after computing 0.5 - 0.01 * 1301.82?",
+    "ans": "-12.51",
+    "alt": ["-12.510"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "In Step 5, using the gradient dE/db1 = 86.78, what is the updated value of b1 after computing 1 - 0.01 * 86.78?",
+    "ans": "0.13",
+    "alt": ["0.130"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "According to the ReLU formula f(x) = max(0, x), what is f(4.2)?",
+    "ans": "4.2",
+    "alt": ["4.20"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "According to the ReLU formula f(x) = max(0, x), what is f(-2.5)?",
     "ans": "0",
-    "alt": ["no change", "0.0", "none"]
+    "alt": ["0.0"]
   },
   {
-    "sec": "Backward Propagation Computations",
-    "q": "Given current bias b = 0.25, learning rate alpha = 0.1, and gradient dL/db = -0.5, calculate the updated bias value: 0.25 - (0.1 * -0.5).",
+    "sec": "Forward & Backward Computations",
+    "q": "For the Sigmoid function f(x) = 1 / (1 + e^(-x)), what is f(0)?",
+    "ans": "0.5",
+    "alt": ["0.50"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "If two class exponents in the Softmax formula evaluate to e^(p1) = 3 and e^(p2) = 7, what is the probability for class 1: 3 / (3 + 7)?",
     "ans": "0.3",
     "alt": ["0.30"]
   },
   {
-    "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.0, what dataset module is imported from tf.keras.datasets to load Fashion-MNIST?",
-    "ans": "fashion_mnist",
-    "alt": ["fashion_mnist.load_data()", "tf.keras.datasets.fashion_mnist"]
+    "sec": "Forward & Backward Computations",
+    "q": "If class logits produce exponents e^(p1) = 1, e^(p2) = 1, e^(p3) = 2, what is the Softmax probability for class 3: 2 / (1 + 1 + 2)?",
+    "ans": "0.5",
+    "alt": ["0.50"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "If x1 = 2, w1 = 0.4, and b1 = 0.5, what is z1 = w1 * x1 + b1?",
+    "ans": "1.3",
+    "alt": ["1.30"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "If o1 = 0.5, w2 = 0.6, and b2 = 0.2, what is z2 = w2 * o1 + b2?",
+    "ans": "0.5",
+    "alt": ["0.50"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "If y_hat = 0.6, what is the value of the sigmoid derivative y_hat * (1 - y_hat)?",
+    "ans": "0.24",
+    "alt": ["0.240"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "If y_hat = 0.9, what is the value of the sigmoid derivative y_hat * (1 - y_hat)?",
+    "ans": "0.09",
+    "alt": ["0.090"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "How many total flattened inputs result from a 28 x 28 image input layer?",
+    "ans": "784",
+    "alt": ["784 inputs", "784 neurons"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "How many weight connections exist between 784 flattened inputs and 128 dense neurons (784 * 128)?",
+    "ans": "100352",
+    "alt": ["100,352"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "In Listing 2.5, what is the total number of parameters in the first dense layer including 128 biases (100352 + 128)?",
+    "ans": "100480",
+    "alt": ["100,480"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "How many weight connections exist between 128 neurons and 64 neurons (128 * 64)?",
+    "ans": "8192",
+    "alt": ["8,192"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "In Listing 2.5, what is the total number of parameters in dense_1 including 64 biases (8192 + 64)?",
+    "ans": "8256",
+    "alt": ["8,256"]
+  },
+  {
+    "sec": "Forward & Backward Computations",
+    "q": "In Listing 2.5, what is the total number of parameters in dense_2 with 64 inputs and 10 output units including biases ((64 * 10) + 10)?",
+    "ans": "650",
+    "alt": ["650 parameters"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.0, what method call loads the train and test splits into (x_train, y_train), (x_test, y_test)?",
+    "q": "In Listing 2.0, what function is called to import and split the dataset from tf.keras.datasets.fashion_mnist?",
     "ans": "load_data()",
-    "alt": ["tf.keras.datasets.fashion_mnist.load_data()"]
+    "alt": ["tf.keras.datasets.fashion_mnist.load_data()", "load_data"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.1, what NumPy attribute of x_train is printed to display (60000, 28, 28)?",
-    "ans": "shape",
-    "alt": ["x_train.shape", ".shape"]
+    "q": "In Listing 2.1, what is the printed shape tuple of x_train?",
+    "ans": "(60000, 28, 28)",
+    "alt": ["(60000,28,28)"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.2, which class name corresponds to label index 0 in the class_names list?",
+    "q": "In Listing 2.1, what is the printed shape tuple of y_train?",
+    "ans": "(60000,)",
+    "alt": ["(60000, )"]
+  },
+  {
+    "sec": "Hands-on Code & Implementation",
+    "q": "In Listing 2.1, what is the printed shape tuple of x_test?",
+    "ans": "(10000, 28, 28)",
+    "alt": ["(10000,28,28)"]
+  },
+  {
+    "sec": "Hands-on Code & Implementation",
+    "q": "In Listing 2.1, what is the printed shape tuple of y_test?",
+    "ans": "(10000,)",
+    "alt": ["(10000, )"]
+  },
+  {
+    "sec": "Hands-on Code & Implementation",
+    "q": "In Listing 2.2, which apparel category is assigned to index 0 of class_names?",
     "ans": "T-shirt/top",
     "alt": ["T-shirt / top"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.2, which class name corresponds to label index 9 in the class_names list?",
+    "q": "In Listing 2.2, which apparel category is assigned to index 1 of class_names?",
+    "ans": "Trouser",
+    "alt": ["trouser"]
+  },
+  {
+    "sec": "Hands-on Code & Implementation",
+    "q": "In Listing 2.2, which apparel category is assigned to index 9 of class_names?",
     "ans": "Ankle boot",
     "alt": ["ankle boot"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.2, which matplotlib function sets the colormap to display grayscale images (cmap='gray')?",
-    "ans": "imshow",
-    "alt": ["plt.imshow", "plt.imshow()"]
+    "q": "In Listing 2.2, what colormap string is passed into plt.imshow() to display grayscale images?",
+    "ans": "gray",
+    "alt": ["'gray'", "cmap='gray'"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.3, what data type is specified in .astype('float32') before dividing by 255.0?",
-    "ans": "float32",
-    "alt": ["'float32'"]
+    "q": "In Listing 2.3, what method converts image arrays to 32-bit floats before scaling?",
+    "ans": "astype('float32')",
+    "alt": [".astype('float32')", "astype"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.3, what floating-point number is x_train divided by to normalize pixel intensities to the [0, 1] range?",
+    "q": "In Listing 2.3, what divisor is used to scale pixel values into the [0, 1] range?",
     "ans": "255.0",
     "alt": ["255"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.4, which Keras layer type flattens the two-dimensional 28 x 28 input arrays into 1D vectors?",
+    "q": "In Listing 2.4, what layer class is imported from tensorflow.keras.layers to flatten 2D inputs?",
     "ans": "Flatten",
-    "alt": ["Flatten()", "flatten"]
+    "alt": ["Flatten layer"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.4, what parameter tuple is passed to the Flatten layer to define image dimensions?",
+    "q": "In Listing 2.4, what parameter tuple is specified in Flatten(input_shape=...)?",
     "ans": "(28, 28)",
     "alt": ["input_shape=(28, 28)"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.4, how many units are specified in the first Dense hidden layer?",
+    "q": "In Listing 2.4, how many units are specified for the first Dense hidden layer?",
     "ans": "128",
     "alt": ["128 units"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.4, what activation string is passed to both Dense hidden layers?",
+    "q": "In Listing 2.4, what activation string is given to the first Dense layer?",
     "ans": "relu",
     "alt": ["'relu'"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.4, how many units are specified in the second Dense hidden layer?",
+    "q": "In Listing 2.4, how many units are defined in the second Dense layer?",
     "ans": "64",
     "alt": ["64 units"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.4, how many units are configured in the final output Dense layer for the Fashion-MNIST classes?",
+    "q": "In Listing 2.4, how many units are configured in the final output Dense layer?",
     "ans": "10",
     "alt": ["10 units"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.4, what activation function string is specified for the final Dense layer?",
+    "q": "In Listing 2.4, what activation string is assigned to the 10-unit output layer?",
     "ans": "softmax",
     "alt": ["'softmax'"]
   },
@@ -546,121 +528,73 @@ window.quizRegistry ['iai2'] = {
     "sec": "Hands-on Code & Implementation",
     "q": "In Listing 2.5, what optimizer string is passed to model.compile()?",
     "ans": "adam",
-    "alt": ["'adam'", "Adam"]
+    "alt": ["'adam'"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.5, what loss function string is used to compile the model for integer category labels?",
+    "q": "In Listing 2.5, what loss function string is used for integer target labels?",
     "ans": "sparse_categorical_crossentropy",
     "alt": ["'sparse_categorical_crossentropy'"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.5, what evaluation metric string is included in the metrics list?",
+    "q": "In Listing 2.5, what evaluation metric string is passed in the metrics list?",
     "ans": "accuracy",
     "alt": ["'accuracy'"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.5, what method is executed to output the tabular architecture and parameter count of the model?",
+    "q": "In Listing 2.5, what method call outputs the layer names, output shapes, and parameter counts?",
     "ans": "model.summary()",
-    "alt": ["summary()", ".summary()"]
+    "alt": [".summary()", "summary()"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.6, how many epochs are specified in model.fit()?",
+    "q": "In Listing 2.5, what is the exact number of total trainable parameters displayed in the summary table?",
+    "ans": "109,386",
+    "alt": ["109386"]
+  },
+  {
+    "sec": "Hands-on Code & Implementation",
+    "q": "In Listing 2.6, how many epochs are executed in model.fit()?",
     "ans": "10",
     "alt": ["epochs=10"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.6, what float value is assigned to validation_split to reserve 20% of training data for validation?",
+    "q": "In Listing 2.6, what float value is set for validation_split to hold out validation data?",
     "ans": "0.2",
     "alt": ["0.20", "validation_split=0.2"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.7, what Keras model method is called on x_test to generate output probability predictions?",
+    "q": "In Listing 2.7, what method is executed on model to generate predictions on x_test?",
     "ans": "model.predict(x_test)",
-    "alt": ["model.predict", "predict", "predict()"]
+    "alt": ["predict", "model.predict"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.7, what is the shape tuple printed for predictions.shape across the 10,000 test images?",
+    "q": "In Listing 2.7, what is the printed shape tuple of predictions?",
     "ans": "(10000, 10)",
-    "alt": ["(10000,10)", "(10,000, 10)"]
+    "alt": ["(10000,10)"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.8, which NumPy function finds the index of the highest prediction probability along an axis?",
+    "q": "In Listing 2.8, which NumPy function is used to retrieve the class index with highest probability?",
     "ans": "np.argmax",
-    "alt": ["argmax", "numpy.argmax", "np.argmax()"]
+    "alt": ["argmax", "numpy.argmax"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.8, which scikit-learn function is imported from sklearn.metrics to compute the confusion matrix?",
+    "q": "In Listing 2.8, what function imported from sklearn.metrics computes the confusion matrix?",
     "ans": "confusion_matrix",
     "alt": ["confusion_matrix()"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.8, what Seaborn plotting function is used to visualize the confusion matrix as a heatmap?",
+    "q": "In Listing 2.8, what Seaborn function plots the heatmap of the confusion matrix?",
     "ans": "sns.heatmap",
-    "alt": ["sns.heatmap()", "heatmap"]
-  },
-  {
-    "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.8, which scikit-learn function generates precision, recall, and f1-score metrics?",
-    "ans": "classification_report",
-    "alt": ["classification_report()"]
-  },
-  {
-    "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.9, what class from tf.lite is instantiated to load fashion_mnist_model.tflite?",
-    "ans": "Interpreter",
-    "alt": ["tf.lite.Interpreter", "tf.lite.Interpreter()"]
-  },
-  {
-    "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.9, what method must be called immediately on the TFLite interpreter to pre-allocate memory for tensors?",
-    "ans": "allocate_tensors()",
-    "alt": ["interpreter.allocate_tensors()"]
-  },
-  {
-    "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.10, what method is called on the TFLite interpreter to actually execute inference?",
-    "ans": "interpreter.invoke()",
-    "alt": ["invoke()", "invoke"]
-  },
-  {
-    "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.10, which NumPy function is used to add a batch dimension at axis=0?",
-    "ans": "np.expand_dims",
-    "alt": ["expand_dims", "np.expand_dims()"]
-  },
-  {
-    "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.10, which NumPy function is used to remove single-dimensional entries from the output shape?",
-    "ans": "np.squeeze",
-    "alt": ["squeeze", "np.squeeze()"]
-  },
-  {
-    "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.11, what Gradio component class is configured for output_text to display multi-class prediction probabilities?",
-    "ans": "gr.Label()",
-    "alt": ["gr.Label", "Label", "Label()"]
-  },
-  {
-    "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.11, what method is appended to gr.Interface(...) to start the web application server?",
-    "ans": "launch()",
-    "alt": [".launch()", "launch(debug=True)", "launch"]
-  },
-  {
-    "sec": "Hands-on Code & Implementation",
-    "q": "According to the classification report in Listing 2.8, what was the overall test accuracy score achieved by the model?",
-    "ans": "0.87",
-    "alt": ["87%", "0.870"]
+    "alt": ["heatmap", "sns.heatmap()"]
   }
 ]
 }
