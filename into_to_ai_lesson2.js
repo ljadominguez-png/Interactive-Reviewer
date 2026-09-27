@@ -184,325 +184,325 @@ window.quizRegistry ['iai2'] = {
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given an input $x_1 = 2$, weight $w_1 = 0.5$, and bias $b_1 = 0.2$, calculate the linear combination $z_1 = x_1 \\cdot w_1 + b_1$.",
+    "q": "Given an input x1 = 2, weight w1 = 0.5, and bias b1 = 0.2, calculate the linear combination z1 = x1 * w1 + b1.",
     "ans": "1.2",
     "alt": ["1.20"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given an input $x_1 = 4$, weight $w_1 = -0.5$, and bias $b_1 = 1.0$, calculate $z_1$.",
+    "q": "Given an input x1 = 4, weight w1 = -0.5, and bias b1 = 1.0, calculate z1 = x1 * w1 + b1.",
     "ans": "-1",
     "alt": ["-1.0", "-1.00"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given $z_1 = 0$, evaluate the sigmoid activation $\\sigma(z_1) = \\frac{1}{1 + e^{-0}}$.",
+    "q": "Given z1 = 0, evaluate the sigmoid activation 1 / (1 + e^(-0)).",
     "ans": "0.5",
     "alt": ["0.50"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given $z_1 = 2$, what is the output of the ReLU activation function $\\text{ReLU}(z_1) = \\max(0, z_1)$?",
+    "q": "Given z1 = 2, what is the output of the ReLU activation function ReLU(z1) = max(0, z1)?",
     "ans": "2",
     "alt": ["2.0"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given $z_1 = -4.5$, what is the output of the ReLU activation function $\\text{ReLU}(z_1)$?",
+    "q": "Given z1 = -4.5, what is the output of the ReLU activation function ReLU(z1)?",
     "ans": "0",
     "alt": ["0.0"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given hidden activation $a_1 = 0.6$, weight $w_2 = 1.5$, and bias $b_2 = 0.1$, compute the linear output $z_2 = a_1 \\cdot w_2 + b_2$.",
+    "q": "Given hidden activation a1 = 0.6, weight w2 = 1.5, and bias b2 = 0.1, compute the linear output z2 = a1 * w2 + b2.",
     "ans": "1",
     "alt": ["1.0", "1.00"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given hidden activation $a_1 = 0.8$, weight $w_2 = -0.5$, and bias $b_2 = 0.4$, compute $z_2 = a_1 \\cdot w_2 + b_2$.",
+    "q": "Given hidden activation a1 = 0.8, weight w2 = -0.5, and bias b2 = 0.4, compute z2 = a1 * w2 + b2.",
     "ans": "0",
     "alt": ["0.0", "0.00"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given $z_2 = 0$, evaluate the final sigmoid prediction $\\hat{y} = \\sigma(z_2)$.",
+    "q": "Given z2 = 0, evaluate the final sigmoid prediction y_hat = sigmoid(z2).",
     "ans": "0.5",
     "alt": ["0.50"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given inputs $x_1 = 1, x_2 = 2$ with weights $w_1 = 0.3, w_2 = 0.4$ and bias $b = 0.1$, calculate the total sum $z = x_1 w_1 + x_2 w_2 + b$.",
+    "q": "Given inputs x1 = 1, x2 = 2 with weights w1 = 0.3, w2 = 0.4 and bias b = 0.1, calculate the total sum z = x1*w1 + x2*w2 + b.",
     "ans": "1.2",
     "alt": ["1.20"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given inputs $x_1 = 3, x_2 = -2$ with weights $w_1 = 0.5, w_2 = 1.0$ and bias $b = 0.5$, calculate $z = x_1 w_1 + x_2 w_2 + b$.",
+    "q": "Given inputs x1 = 3, x2 = -2 with weights w1 = 0.5, w2 = 1.0 and bias b = 0.5, calculate z = x1*w1 + x2*w2 + b.",
     "ans": "0",
     "alt": ["0.0"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given $z = -3$, what is the output of $\\text{ReLU}(z)$?",
+    "q": "Given z = -3, what is the output of ReLU(z)?",
     "ans": "0",
     "alt": ["0.0"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given two logits $z = [0, 0]$, calculate the softmax probability for the first class: $\\frac{e^0}{e^0 + e^0}$.",
+    "q": "Given two logits z = [0, 0], calculate the softmax probability for the first class: e^0 / (e^0 + e^0).",
     "ans": "0.5",
     "alt": ["0.50", "1/2"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given three equal logits $[2, 2, 2]$, calculate the softmax probability for each class.",
+    "q": "Given three equal logits [2, 2, 2], calculate the softmax probability for each individual class.",
     "ans": "0.333",
     "alt": ["1/3", "0.33", "0.3333"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given an input pixel value of 127.5, compute its normalized value scaled to the $[0, 1]$ range by dividing by 255.",
+    "q": "Given an input pixel value of 127.5, compute its normalized value scaled to the [0, 1] range by dividing by 255.",
     "ans": "0.5",
     "alt": ["0.50"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given an input pixel value of 51, compute its normalized value scaled to $[0, 1]$ ($51 / 255$).",
+    "q": "Given an input pixel value of 51, compute its normalized value scaled to [0, 1] (51 / 255).",
     "ans": "0.2",
     "alt": ["0.20"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given an input pixel value of 204, compute its normalized value scaled to $[0, 1]$ ($204 / 255$).",
+    "q": "Given an input pixel value of 204, compute its normalized value scaled to [0, 1] (204 / 255).",
     "ans": "0.8",
     "alt": ["0.80"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "In a $28 \\times 28$ grayscale image, what is the total number of flattened input neurons?",
+    "q": "In a 28 x 28 grayscale image, what is the total number of flattened input neurons?",
     "ans": "784",
     "alt": ["784 neurons"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "For a dense layer connecting 784 flattened inputs to 128 hidden neurons, calculate the total number of connection weights ($784 \\times 128$).",
+    "q": "For a dense layer connecting 784 flattened inputs to 128 hidden neurons, calculate the total number of connection weights (784 * 128).",
     "ans": "100352",
     "alt": ["100,352"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "For a dense layer connecting 784 inputs to 128 neurons, what is the total number of trainable parameters (weights plus 128 biases)?",
+    "q": "For a dense layer connecting 784 inputs to 128 neurons, what is the total number of trainable parameters including 128 biases?",
     "ans": "100480",
     "alt": ["100,480"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "For a dense layer connecting 128 inputs to 64 neurons, calculate the number of weights ($128 \\times 64$).",
+    "q": "For a dense layer connecting 128 inputs to 64 neurons, calculate the total count of weights (128 * 64).",
     "ans": "8192",
     "alt": ["8,192"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "For a dense layer connecting 128 inputs to 64 neurons, calculate the total parameter count including 64 biases ($8192 + 64$).",
+    "q": "For a dense layer connecting 128 inputs to 64 neurons, calculate the total parameter count including 64 biases (8192 + 64).",
     "ans": "8256",
     "alt": ["8,256"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "For an output layer connecting 64 inputs to 10 neurons, calculate the total number of parameters including 10 biases ($(64 \\times 10) + 10$).",
+    "q": "For an output layer connecting 64 inputs to 10 neurons, calculate the total number of parameters including 10 biases ((64 * 10) + 10).",
     "ans": "650",
     "alt": ["650 params", "650 parameters"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Calculate the sum of trainable parameters across all layers: $100480 + 8256 + 650$.",
+    "q": "Calculate the sum of trainable parameters across all layers: 100480 + 8256 + 650.",
     "ans": "109386",
     "alt": ["109,386"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "If an image of dimension $32 \\times 32$ is flattened, how many neurons will the input vector contain?",
+    "q": "If an image of dimension 32 x 32 is flattened, how many neurons will the input vector contain?",
     "ans": "1024",
     "alt": ["1,024"]
   },
   {
     "sec": "Forward Propagation Computations",
-    "q": "Given $x = 0.5, w = -0.4, b = 0.2$, calculate the linear sum $z = x \\cdot w + b$.",
+    "q": "Given x = 0.5, w = -0.4, and b = 0.2, calculate the linear sum z = x * w + b.",
     "ans": "0",
     "alt": ["0.0"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "Given predicted value $\\hat{y} = 0.8$ and actual target value $y = 1.0$, calculate the error difference $e = (\\hat{y} - y)$.",
+    "q": "Given predicted value y_hat = 0.8 and actual target value y = 1.0, calculate the error difference e = (y_hat - y).",
     "ans": "-0.2",
     "alt": ["-0.20"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "Given $\\hat{y} = 0.65$ and $y = 0.0$, calculate the prediction error $e = (\\hat{y} - y)$.",
+    "q": "Given y_hat = 0.65 and y = 0.0, calculate the prediction error e = (y_hat - y).",
     "ans": "0.65",
     "alt": ["+0.65"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "Using the simplified squared error derivative $\\frac{\\partial L}{\\partial \\hat{y}} = (\\hat{y} - y)$, find the derivative when $\\hat{y} = 0.7$ and $y = 0.5$.",
+    "q": "Using the simplified squared error derivative dL/dy_hat = (y_hat - y), find the derivative when y_hat = 0.7 and y = 0.5.",
     "ans": "0.2",
     "alt": ["0.20"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "For a sigmoid output $\\hat{y} = 0.5$, calculate the sigmoid derivative $\\frac{\\partial \\hat{y}}{\\partial z_2} = \\hat{y}(1 - \\hat{y})$.",
+    "q": "For a sigmoid output y_hat = 0.5, calculate the sigmoid derivative value dy_hat/dz2 = y_hat * (1 - y_hat).",
     "ans": "0.25",
     "alt": ["0.250"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "For a sigmoid output $\\hat{y} = 0.8$, calculate the sigmoid derivative value $\\hat{y}(1 - \\hat{y})$.",
+    "q": "For a sigmoid output y_hat = 0.8, calculate the sigmoid derivative value y_hat * (1 - y_hat).",
     "ans": "0.16",
     "alt": ["0.160"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "For a sigmoid output $\\hat{y} = 0.2$, calculate the sigmoid derivative value $\\hat{y}(1 - \\hat{y})$.",
+    "q": "For a sigmoid output y_hat = 0.2, calculate the sigmoid derivative value y_hat * (1 - y_hat).",
     "ans": "0.16",
     "alt": ["0.160"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "Given linear output $z_2 = a_1 w_2 + b_2$, what is the partial derivative $\\frac{\\partial z_2}{\\partial w_2}$?",
+    "q": "Given linear output z2 = a1 * w2 + b2, what is the partial derivative dz2/dw2?",
     "ans": "a1",
     "alt": ["a_1", "activation of previous layer", "a1"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "Given linear output $z_2 = a_1 w_2 + b_2$, what is the partial derivative $\\frac{\\partial z_2}{\\partial b_2}$ with respect to the bias?",
+    "q": "Given linear output z2 = a1 * w2 + b2, what is the partial derivative dz2/db2 with respect to the bias?",
     "ans": "1",
     "alt": ["1.0", "one"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "If $\\frac{\\partial L}{\\partial \\hat{y}} = -0.2$, $\\frac{\\partial \\hat{y}}{\\partial z_2} = 0.25$, and $\\frac{\\partial z_2}{\\partial w_2} = 0.6$, calculate $\\frac{\\partial L}{\\partial w_2}$ by multiplying the three terms.",
+    "q": "If dL/dy_hat = -0.2, dy_hat/dz2 = 0.25, and dz2/dw2 = 0.6, calculate dL/dw2 by multiplying the three terms (-0.2 * 0.25 * 0.6).",
     "ans": "-0.03",
     "alt": ["-0.030"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "If $\\frac{\\partial L}{\\partial \\hat{y}} = 0.4$, $\\frac{\\partial \\hat{y}}{\\partial z_2} = 0.2$, and $\\frac{\\partial z_2}{\\partial b_2} = 1$, calculate $\\frac{\\partial L}{\\partial b_2}$.",
+    "q": "If dL/dy_hat = 0.4, dy_hat/dz2 = 0.2, and dz2/db2 = 1, calculate dL/db2 by multiplying the terms (0.4 * 0.2 * 1).",
     "ans": "0.08",
     "alt": ["0.080"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "Given current weight $w_2 = 0.5$, learning rate $\\alpha = 0.1$, and gradient $\\frac{\\partial L}{\\partial w_2} = 0.2$, compute the updated weight $w_2^{\\text{new}} = w_2 - \\alpha \\frac{\\partial L}{\\partial w_2}$.",
+    "q": "Given current weight w2 = 0.5, learning rate alpha = 0.1, and gradient dL/dw2 = 0.2, compute the updated weight: w2 - (alpha * dL/dw2).",
     "ans": "0.48",
     "alt": ["0.480"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "Given current weight $w_2 = 0.4$, learning rate $\\alpha = 0.05$, and gradient $\\frac{\\partial L}{\\partial w_2} = -0.4$, compute $w_2^{\\text{new}} = w_2 - \\alpha \\frac{\\partial L}{\\partial w_2}$.",
+    "q": "Given current weight w2 = 0.4, learning rate alpha = 0.05, and gradient dL/dw2 = -0.4, compute the updated weight: w2 - (alpha * dL/dw2).",
     "ans": "0.42",
     "alt": ["0.420"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "Given current bias $b_2 = 0.1$, learning rate $\\alpha = 0.1$, and gradient $\\frac{\\partial L}{\\partial b_2} = 0.08$, compute the updated bias $b_2^{\\text{new}} = b_2 - \\alpha \\frac{\\partial L}{\\partial b_2}$.",
+    "q": "Given current bias b2 = 0.1, learning rate alpha = 0.1, and gradient dL/db2 = 0.08, compute the updated bias: b2 - (alpha * dL/db2).",
     "ans": "0.092",
     "alt": ["0.0920"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "Given weight $w_1 = 0.8$, learning rate $\\alpha = 0.2$, and gradient $\\frac{\\partial L}{\\partial w_1} = 0.5$, compute the updated weight $w_1^{\\text{new}}$.",
+    "q": "Given weight w1 = 0.8, learning rate alpha = 0.2, and gradient dL/dw1 = 0.5, compute the updated weight w1 - (alpha * dL/dw1).",
     "ans": "0.7",
     "alt": ["0.70"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "What is the derivative of the ReLU activation $\\frac{d}{dz}\\text{ReLU}(z)$ for any input $z > 0$?",
+    "q": "What is the derivative of the ReLU activation d/dz(ReLU(z)) for any input z > 0?",
     "ans": "1",
     "alt": ["1.0", "one"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "What is the derivative of the ReLU activation $\\frac{d}{dz}\\text{ReLU}(z)$ for any input $z < 0$?",
+    "q": "What is the derivative of the ReLU activation d/dz(ReLU(z)) for any input z < 0?",
     "ans": "0",
     "alt": ["0.0", "zero"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "Given $z_2 = a_1 w_2 + b_2$, what is the partial derivative $\\frac{\\partial z_2}{\\partial a_1}$ with respect to the hidden unit activation?",
+    "q": "Given z2 = a1 * w2 + b2, what is the partial derivative dz2/da1 with respect to the hidden unit activation?",
     "ans": "w2",
     "alt": ["w_2", "the weight w2"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "If $\\frac{\\partial L}{\\partial z_2} = 0.1$ and $w_2 = 0.5$, calculate the backpropagated gradient to the hidden activation $\\frac{\\partial L}{\\partial a_1} = \\frac{\\partial L}{\\partial z_2} \\cdot w_2$.",
+    "q": "If dL/dz2 = 0.1 and w2 = 0.5, calculate the backpropagated gradient to the hidden activation dL/da1 = (dL/dz2) * w2.",
     "ans": "0.05",
     "alt": ["0.050"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "If gradient $\\frac{\\partial L}{\\partial w} = 0$, how much does the weight change after gradient descent update?",
+    "q": "If gradient dL/dw = 0, how much does the weight change after gradient descent update?",
     "ans": "0",
     "alt": ["no change", "0.0", "none"]
   },
   {
     "sec": "Backward Propagation Computations",
-    "q": "Given current bias $b = 0.25$, learning rate $\\alpha = 0.1$, and gradient $\\frac{\\partial L}{\\partial b} = -0.5$, calculate the new bias value.",
+    "q": "Given current bias b = 0.25, learning rate alpha = 0.1, and gradient dL/db = -0.5, calculate the updated bias value: 0.25 - (0.1 * -0.5).",
     "ans": "0.3",
     "alt": ["0.30"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.0, what dataset module is imported from `tf.keras.datasets` to load Fashion-MNIST?",
+    "q": "In Listing 2.0, what dataset module is imported from tf.keras.datasets to load Fashion-MNIST?",
     "ans": "fashion_mnist",
     "alt": ["fashion_mnist.load_data()", "tf.keras.datasets.fashion_mnist"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.0, what method call loads the train and test splits into `(x_train, y_train), (x_test, y_test)`?",
+    "q": "In Listing 2.0, what method call loads the train and test splits into (x_train, y_train), (x_test, y_test)?",
     "ans": "load_data()",
     "alt": ["tf.keras.datasets.fashion_mnist.load_data()"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.1, what NumPy attribute of `x_train` is printed to display `(60000, 28, 28)`?",
+    "q": "In Listing 2.1, what NumPy attribute of x_train is printed to display (60000, 28, 28)?",
     "ans": "shape",
     "alt": ["x_train.shape", ".shape"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.2, which class name corresponds to label index 0 in the `class_names` list?",
+    "q": "In Listing 2.2, which class name corresponds to label index 0 in the class_names list?",
     "ans": "T-shirt/top",
     "alt": ["T-shirt / top"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.2, which class name corresponds to label index 9 in the `class_names` list?",
+    "q": "In Listing 2.2, which class name corresponds to label index 9 in the class_names list?",
     "ans": "Ankle boot",
     "alt": ["ankle boot"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.2, which matplotlib function sets the colormap to display grayscale images (`cmap='gray'`)?",
+    "q": "In Listing 2.2, which matplotlib function sets the colormap to display grayscale images (cmap='gray')?",
     "ans": "imshow",
     "alt": ["plt.imshow", "plt.imshow()"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.3, what data type is specified in `.astype('float32')` before dividing by 255.0?",
+    "q": "In Listing 2.3, what data type is specified in .astype('float32') before dividing by 255.0?",
     "ans": "float32",
     "alt": ["'float32'"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.3, what floating-point number is `x_train` divided by to normalize pixel intensities to the $[0, 1]$ range?",
+    "q": "In Listing 2.3, what floating-point number is x_train divided by to normalize pixel intensities to the [0, 1] range?",
     "ans": "255.0",
     "alt": ["255"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.4, which Keras layer type flattens the two-dimensional $28 \\times 28$ input arrays into 1D vectors?",
+    "q": "In Listing 2.4, which Keras layer type flattens the two-dimensional 28 x 28 input arrays into 1D vectors?",
     "ans": "Flatten",
     "alt": ["Flatten()", "flatten"]
   },
@@ -544,7 +544,7 @@ window.quizRegistry ['iai2'] = {
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.5, what optimizer string is passed to `model.compile()`?",
+    "q": "In Listing 2.5, what optimizer string is passed to model.compile()?",
     "ans": "adam",
     "alt": ["'adam'", "Adam"]
   },
@@ -568,25 +568,25 @@ window.quizRegistry ['iai2'] = {
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.6, how many epochs are specified in `model.fit()`?",
+    "q": "In Listing 2.6, how many epochs are specified in model.fit()?",
     "ans": "10",
     "alt": ["epochs=10"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.6, what float value is assigned to `validation_split` to reserve 20% of training data for validation?",
+    "q": "In Listing 2.6, what float value is assigned to validation_split to reserve 20% of training data for validation?",
     "ans": "0.2",
     "alt": ["0.20", "validation_split=0.2"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.7, what Keras model method is called on `x_test` to generate output probability predictions?",
+    "q": "In Listing 2.7, what Keras model method is called on x_test to generate output probability predictions?",
     "ans": "model.predict(x_test)",
     "alt": ["model.predict", "predict", "predict()"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.7, what is the shape tuple printed for `predictions.shape` across the 10,000 test images?",
+    "q": "In Listing 2.7, what is the shape tuple printed for predictions.shape across the 10,000 test images?",
     "ans": "(10000, 10)",
     "alt": ["(10000,10)", "(10,000, 10)"]
   },
@@ -598,7 +598,7 @@ window.quizRegistry ['iai2'] = {
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.8, which scikit-learn function is imported from `sklearn.metrics` to compute the confusion matrix?",
+    "q": "In Listing 2.8, which scikit-learn function is imported from sklearn.metrics to compute the confusion matrix?",
     "ans": "confusion_matrix",
     "alt": ["confusion_matrix()"]
   },
@@ -616,7 +616,7 @@ window.quizRegistry ['iai2'] = {
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.9, what class from `tf.lite` is instantiated to load `fashion_mnist_model.tflite`?",
+    "q": "In Listing 2.9, what class from tf.lite is instantiated to load fashion_mnist_model.tflite?",
     "ans": "Interpreter",
     "alt": ["tf.lite.Interpreter", "tf.lite.Interpreter()"]
   },
@@ -634,7 +634,7 @@ window.quizRegistry ['iai2'] = {
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.10, which NumPy function is used to add a batch dimension at `axis=0`?",
+    "q": "In Listing 2.10, which NumPy function is used to add a batch dimension at axis=0?",
     "ans": "np.expand_dims",
     "alt": ["expand_dims", "np.expand_dims()"]
   },
@@ -646,13 +646,13 @@ window.quizRegistry ['iai2'] = {
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.11, what Gradio component class is configured for `output_text` to display multi-class prediction probabilities?",
+    "q": "In Listing 2.11, what Gradio component class is configured for output_text to display multi-class prediction probabilities?",
     "ans": "gr.Label()",
     "alt": ["gr.Label", "Label", "Label()"]
   },
   {
     "sec": "Hands-on Code & Implementation",
-    "q": "In Listing 2.11, what method is appended to `gr.Interface(...)` to start the web application server?",
+    "q": "In Listing 2.11, what method is appended to gr.Interface(...) to start the web application server?",
     "ans": "launch()",
     "alt": [".launch()", "launch(debug=True)", "launch"]
   },
